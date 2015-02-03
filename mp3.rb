@@ -9,31 +9,27 @@ array = []
 
 loop do
 
-line_width = 40
-line_width2 = 67
 puts
-puts('Leo-Mp3 Finder'.center( line_width))
-puts '--------------------------------------------------------------------------------'
-puts( 'Sprachen'.ljust( line_width) + 'Bisherige Vokabeln'.rjust( line_width))
-array.each do |co| 
-puts( co.rjust( line_width2))  
-end
-puts( 'english = e'.ljust( line_width))
-puts( 'spanish = s'.ljust( line_width)) 
-puts( 'french = f'.ljust( line_width))
+puts  'Leo-Mp3 Finder'
+puts  '----------------------------------'
 puts
-puts( 'exit = x'.ljust( line_width))
-	
-
-
-
-
-	
-	puts
-	sprache = gets.chomp!
+puts  'Bisherige Vokabeln'
+puts
+puts array
+puts
+puts
+puts  'Sprachen'
+puts  "----------------------------------"
+puts  'english = e'
+puts  'spanish = s'
+puts  'french = f'
+puts
+puts  'exit = x'
+puts
+sprache = gets.chomp!
 break if sprache == "x"
 	puts
-	puts('Which word/ expression? => exit = x'.center( line_width))
+	puts 'Which word/ expression? => exit = x'
 	puts ""
 	begriff = gets.chomp!
 	array.push "#{begriff}"
@@ -66,9 +62,8 @@ break if begriff == "x"
 	Clipboard.copy $ergebnis 
 	puts
 	puts
-`sleep 1`
-puts `clear`
+  `sleep 1` # puts bash for one second two sleep
+  puts `clear`# clears bash
 end
 
-# To Do: nachgeschlagene Vokabeln in eine Liste, clear
 
