@@ -9,14 +9,20 @@ require 'colorize'
 # Methods
 
 def warm_welcome data
+  puts  '##################################'.green
+  puts  '#                                #'.green
+  puts  '#                                #'.green
+  puts  '#       Leo-Mp3 Finder           #'.green
+  puts  '#                                #'.green
+  puts  '##################################'.green
   puts
-  puts  'Leo-Mp3 Finder'
-  puts  '----------------------------------'
-#  puts
-#  puts  'Bisherige Vokabeln'
-#  puts  data
-#  puts  "no entrys yet" if data.empty?
+  puts  
+  puts 
   puts
+  puts
+  `sleep 3` # puts bash for one second two sleep
+  puts `clear`# clears bash
+
 end
 def select_language 
   begin
@@ -29,6 +35,7 @@ def select_language
   puts  'exit = x'
   puts
   @sprache = gets.chomp!
+  puts `clear`# clears bash
   end until @sprache == "e" || @sprache == "s" || @sprache == "f"
 end
 def select_word 
@@ -57,12 +64,13 @@ def default_settings
 end
 
 def main_menue(data, sparta)
-puts  "main menue".red
+    
+puts  '                   Leo-Mp3 Finder           '
+puts  "                   main menue".red
 puts
-puts  "lenguage is set to #{data[@sprache]}"
-puts  'Bisherige Vokabeln'
-puts  sparta 
-puts  "no entrys yet" if sparta.empty?
+puts  "lenguage is set to: #{data[@sprache].red}"
+sparta = "no entrys yet".red if sparta.empty?
+puts  "Bisherige Vokabeln: #{sparta}"
 puts
 puts  "1 = welcome 2 = change language 3 = select word 4 = break"
 @choice = gets.chomp!.to_i 
