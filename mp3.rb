@@ -8,9 +8,10 @@ require 'colorize'
 
 # Methods
 
-def default_settings
+def default_settings 
   @sprache = "e"
 end
+
 def lenguage
   @hash = { "e" => "english", "s" => "spanish", "f" => "french" }
   puts  "lenguage is set to: #{@hash[@sprache].red}"
@@ -88,7 +89,6 @@ main_menue if @begriff == "m"
 	when @sprache == "f"
 	  @url = url_fr
 	end	
-  @array.push @begriff
 	noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
 	variable = noko.at_css('pron').first[1]
 	Clipboard.copy "http://dict.leo.org/media/audio/#{variable}.mp3"
@@ -101,7 +101,7 @@ main_menue if @begriff == "m"
 end
 
 # let the app beginn
-default_settings
+default_settings 
 warm_welcome 
 main_menue
 loop do
