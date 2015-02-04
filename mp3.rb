@@ -8,6 +8,19 @@ require 'colorize'
 
 # Methods
 
+def default_settings
+  @sprache = "e"
+end
+def lenguage
+@hash = { "e" => "english", "s" => "spanish", "f" => "french" }
+puts  "lenguage is set to: #{@hash[@sprache].red}"
+end
+def register
+@array = []
+@array = "no entrys yet".red if @array.empty?
+puts  "Bisherige Vokabeln: #{@array}"
+end
+
 def warm_welcome data
   puts  '##################################'.green
   puts  '#                                #'.green
@@ -22,12 +35,22 @@ def warm_welcome data
   puts
   `sleep 1` # puts bash for one second two sleep
   puts `clear`# clears bash
-
+end
+def main_menue(data, sparta)
+puts  '   ######  Leo-Mp3 Finder #######  Main Meue #######'
+puts
+puts  "Press: 1 for: Welcome 2 for: Changing Languages 3 for:  Searching a Word 4 for: Exiting"
+puts
+lenguage
+register
+puts
+@choice = gets.chomp!.to_i 
+return @choice # wahrscheinlich redundant
 end
 def select_language 
   begin
   puts `clear`# clears bash
-  puts  ' ######  Leo-Mp3 Finder #######  Select Language  #######'
+  puts  '   ######  Leo-Mp3 Finder #######  Select Language  #######'
   puts  
   puts  "Press: e for: English s for: Spanish f for: French 4 for: Exiting"
   puts
@@ -35,14 +58,12 @@ def select_language
   puts `clear`# clears bash
   end until @sprache == "e" || @sprache == "s" || @sprache == "f"
 end
-def select_word 
+def select_word data
+  puts  '    ######  Leo-Mp3 Finder #######  Search a Word #######'
   puts
-	puts 'Which word/ expression? => exit = x'
-	puts ""
-  @begriff = gets.chomp!
-end
-def process_url
-  @begriff.gsub!(' ', '%20') # Leerzeichen in der Eingabe werden mit "%20" ausgetauscht weil Leo das so möchte!  
+	puts 
+  print "word your are looking for:   "; @begriff = gets.chomp!
+@begriff.gsub!(' ', '%20') # Leerzeichen in der Eingabe werden mit "%20" ausgetauscht weil Leo das so möchte!  
   url_en = "http://dict.leo.org/dictQuery/m-vocab/ende/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"             
   url_es = "http://dict.leo.org/dictQuery/m-vocab/esde/query.xml?tolerMode=nof&lp=esde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   url_fr = "http://dict.leo.org/dictQuery/m-vocab/frde/query.xml?tolerMode=nof&lp=frde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
@@ -54,29 +75,20 @@ def process_url
 	when @sprache == "f"
 	  @url = url_fr
 	end	
-end
-
-def default_settings
-  @sprache = "e"
-end
-
-def main_menue(data, sparta)
-    
-puts  '   ######  Leo-Mp3 Finder #######  Main Meue #######'
-puts
-puts  "Press: 1 for: Welcome 2 for: Changing Languages 3 for:  Searching a Word 4 for: Exiting"
-puts
-puts  "lenguage is set to: #{data[@sprache].red}"
-sparta = "no entrys yet".red if sparta.empty?
-puts  "Bisherige Vokabeln: #{sparta}"
-puts
-@choice = gets.chomp!.to_i 
-return @choice # wahrscheinlich redundant
+#  data.push @begriff
+	noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
+	variable = noko.at_css('pron').first[1]
+	Clipboard.copy "http://dict.leo.org/media/audio/#{variable}.mp3"
+	puts
+	puts "Mp3 was copied to the Clipboard".red
+	puts
+	puts
+  `sleep 1` # puts bash for one second two sleep
+  puts `clear`# clears bash
 end
 
 # let the app beginn
 array = []
-hash = { "e" => "english", "s" => "spanish", "f" => "french" }
 default_settings
 warm_welcome array
 main_menue(hash, array)
@@ -89,12 +101,12 @@ loop do
     select_language 
     main_menue(hash, array)
   when 3
-    select_word
+    select_word array
   when 4
     break
   end
 end
-#
+
 #array.push @begriff
 #break if @begriff == "x"
 #process_url 
