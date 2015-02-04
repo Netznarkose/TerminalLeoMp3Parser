@@ -29,6 +29,7 @@ def select_language
   puts  'exit = x'
   puts
   @sprache = gets.chomp!
+  puts "lenguage is set to #{@begriff}"
 end
 def select_word 
   puts
@@ -52,26 +53,43 @@ def process_url
 end
 
 # let the app beginn
-
-array = []
-loop do
-ansage_1 array
-select_language
-break if @sprache == "x"
-select_word
-array.push @begriff
-break if @begriff == "x"
-process_url 
-
-	data = Nokogiri::XML(open(@url)) # Variable aus dem case-test
-	variable = data.at_css('pron').first[1]
-	Clipboard.copy "http://dict.leo.org/media/audio/#{variable}.mp3"
-	puts
-	puts "Mp3 was copied to the Clipboard".red
-	puts
-	puts
-  `sleep 1` # puts bash for one second two sleep
-  puts `clear`# clears bash
+def main_menue
+puts "main menue"
+puts "1 = welcome 2 = select language 3 = select word 4 = break"
+@choice = gets.chomp!.to_i
+return @choice
 end
 
-
+array = []
+main_menue
+loop do
+  case @choice 
+  when 1
+    ansage_1 array
+    main_menue
+  when 2
+    select_language
+    main_menue
+  when 3
+    select_word
+  when 4
+   puts "nischt" 
+  end
+end
+#
+#array.push @begriff
+#break if @begriff == "x"
+#process_url 
+#
+#	data = Nokogiri::XML(open(@url)) # Variable aus dem case-test
+#	variable = data.at_css('pron').first[1]
+#	Clipboard.copy "http://dict.leo.org/media/audio/#{variable}.mp3"
+#	puts
+#	puts "Mp3 was copied to the Clipboard".red
+#	puts
+#	puts
+#  `sleep 1` # puts bash for one second two sleep
+#  puts `clear`# clears bash
+#end
+#
+#
