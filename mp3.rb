@@ -8,18 +8,18 @@ require 'colorize'
 
 # Methods
 
-def ansage_1 data
+def warm_welcome data
   puts
   puts  'Leo-Mp3 Finder'
   puts  '----------------------------------'
-  puts
-  puts  'Bisherige Vokabeln'
-  puts
-  puts data
-  puts
+#  puts
+#  puts  'Bisherige Vokabeln'
+#  puts  data
+#  puts  "no entrys yet" if data.empty?
   puts
 end
-def select_language
+def select_language 
+  begin
   puts  'Sprachen'
   puts  "----------------------------------"
   puts  'english = e'
@@ -29,7 +29,7 @@ def select_language
   puts  'exit = x'
   puts
   @sprache = gets.chomp!
-  puts "lenguage is set to #{@begriff}"
+  end until @sprache == "e" || @sprache == "s" || @sprache == "f"
 end
 def select_word 
   puts
@@ -52,28 +52,41 @@ def process_url
 	end	
 end
 
-# let the app beginn
-def main_menue
-puts "main menue"
-puts "1 = welcome 2 = select language 3 = select word 4 = break"
-@choice = gets.chomp!.to_i
-return @choice
+def default_settings
+  @sprache = "e"
 end
 
+def main_menue(data, sparta)
+puts  "main menue".red
+puts
+puts  "lenguage is set to #{data[@sprache]}"
+puts  'Bisherige Vokabeln'
+puts  sparta 
+puts  "no entrys yet" if sparta.empty?
+puts
+puts  "1 = welcome 2 = change language 3 = select word 4 = break"
+@choice = gets.chomp!.to_i 
+return @choice # wahrscheinlich redundant
+end
+
+# let the app beginn
 array = []
-main_menue
+hash = { "e" => "english", "s" => "spanish", "f" => "french" }
+default_settings
+warm_welcome array
+main_menue(hash, array)
 loop do
   case @choice 
   when 1
-    ansage_1 array
-    main_menue
+    warm_welcome array
+    main_menue(hash, array)
   when 2
-    select_language
-    main_menue
+    select_language 
+    main_menue(hash, array)
   when 3
     select_word
   when 4
-   puts "nischt" 
+    break
   end
 end
 #
