@@ -20,19 +20,16 @@ def warm_welcome data
   puts 
   puts
   puts
-  `sleep 3` # puts bash for one second two sleep
+  `sleep 1` # puts bash for one second two sleep
   puts `clear`# clears bash
 
 end
 def select_language 
   begin
-  puts  'Sprachen'
-  puts  "----------------------------------"
-  puts  'english = e'
-  puts  'spanish = s'
-  puts  'french = f'
-  puts
-  puts  'exit = x'
+  puts `clear`# clears bash
+  puts  ' ######  Leo-Mp3 Finder #######  Select Language  #######'
+  puts  
+  puts  "Press: e for: English s for: Spanish f for: French 4 for: Exiting"
   puts
   @sprache = gets.chomp!
   puts `clear`# clears bash
@@ -65,14 +62,14 @@ end
 
 def main_menue(data, sparta)
     
-puts  '                   Leo-Mp3 Finder           '
-puts  "                   main menue".red
+puts  '   ######  Leo-Mp3 Finder #######  Main Meue #######'
+puts
+puts  "Press: 1 for: Welcome 2 for: Changing Languages 3 for:  Searching a Word 4 for: Exiting"
 puts
 puts  "lenguage is set to: #{data[@sprache].red}"
 sparta = "no entrys yet".red if sparta.empty?
 puts  "Bisherige Vokabeln: #{sparta}"
 puts
-puts  "1 = welcome 2 = change language 3 = select word 4 = break"
 @choice = gets.chomp!.to_i 
 return @choice # wahrscheinlich redundant
 end
