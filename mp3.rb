@@ -5,6 +5,7 @@ require 'open-uri'
 require 'Clipboard'
 require 'colorize'
 require_relative 'warm_welcome.rb'
+load 'search_word.rb'
 
 # Methods
 
@@ -49,35 +50,24 @@ def select_language
   end until @sprache == "e" || @sprache == "s" || @sprache == "f"
 end
 def select_word 
-puts `clear`# clears bash
-puts  '######  Leo-Mp3 Finder #######  Search a Word #######'
-puts  "\nWhich Word Are You Looking For ? #### Press => m for Main Menue #####"
-puts
-puts "#{lenguage}\n#{register}"
-print "\nword =>  "; @begriff = gets.chomp!
-main_menue if @begriff == "m"
-@array << @begriff
-@begriff.gsub!(' ', '%20') # Leerzeichen in der Eingabe werden mit "%20" ausgetauscht weil Leo das so möchte!  
-  url_en = "http://dict.leo.org/dictQuery/m-vocab/ende/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"             
-  url_es = "http://dict.leo.org/dictQuery/m-vocab/esde/query.xml?tolerMode=nof&lp=esde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
-  url_fr = "http://dict.leo.org/dictQuery/m-vocab/frde/query.xml?tolerMode=nof&lp=frde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
-  case
-	when @sprache == "e"
-	  @url = url_en
-	when @sprache == "s"
-	  @url = url_es
-	when @sprache == "f"
-	  @url = url_fr
-	end	
-	noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
-	variable = noko.at_css('pron').first[1]
-	Clipboard.copy "http://dict.leo.org/media/audio/#{variable}.mp3"
-	puts
-	puts "Mp3 was copied to the Clipboard".red
-	puts
-	puts
-  `sleep 1` # puts bash for one second two sleep
-  puts `clear`# clears bash
+  begin
+    puts `clear`# clears bash
+    puts  '######  Leo-Mp3 Finder #######  Search a Word #######'
+    puts  "\nWhich Word Are You Looking For ? #### Press => m for Main Menue #####"
+    puts
+    puts "#{lenguage}\n#{register}"
+    print "\nword =>  "; @begriff = gets.chomp!
+    if @begriff.downcase != "m"
+      @array << @begriff
+      # the search_word class !!!
+      finder = SearchWord.new(@begriff, @sprache)
+      finder.get_mp3
+      finder.copy_to_clipboard
+      finder.copy_message
+      `sleep 1` # puts bash for one second two sleep
+      puts `clear`# clears bash
+    end
+  end until @begriff.downcase == "m"
 end
 
 # let the app beginn
@@ -94,6 +84,7 @@ loop do
     main_menue
   when 3
     select_word 
+    main_menue
   when 4
     break
   end
