@@ -51,6 +51,7 @@ puts
 @choice = gets.chomp!.to_i 
 return @choice # wahrscheinlich redundant
 end
+
 def select_language 
 begin
 puts `clear`# clears bash
