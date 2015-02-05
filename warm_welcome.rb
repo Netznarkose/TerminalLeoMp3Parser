@@ -1,4 +1,5 @@
 def warm_welcome 
+  puts `clear`# clears bash
   puts  '##################################'.green
   puts  '#                                #'.green
   puts  '#                                #'.green
@@ -7,10 +8,14 @@ def warm_welcome
   puts  '##################################'.green
   puts
   puts  
+  `sleep 1` 
   puts 
+  puts  ' an App                         '.green
+  `sleep 1` 
+  puts  '       created by: .....        '.green
+  `sleep 1` 
+  puts  '                    Netznarkose '.green
   puts
-  puts  'eine geile app created by netznarkose'
-  `sleep 1` # puts bash for one second two sleep
-  puts `clear`# clears bash
+  `sleep 2` 
 end
 
