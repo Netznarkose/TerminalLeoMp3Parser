@@ -10,6 +10,7 @@ require 'colorize'
 
 def default_settings 
   @sprache = "e"
+  @array = []
 end
 
 def lenguage
@@ -18,9 +19,12 @@ def lenguage
 end
 
 def register
-  @array = []
-  @array = "no entrys yet".red if @array.empty?
-  puts  "Bisherige Vokabeln: #{@array}"
+  if @array.empty?
+    @content = "no entrys yet".red
+  else
+    @content = @array
+  end
+  puts  "Bisherige Vokabeln: #{@content}"
 end
 
 def warm_welcome 
@@ -77,6 +81,8 @@ register
 puts
 puts
 print "word =>  "; @begriff = gets.chomp!
+# @array = 
+  @array << @begriff
 main_menue if @begriff == "m"
 @begriff.gsub!(' ', '%20') # Leerzeichen in der Eingabe werden mit "%20" ausgetauscht weil Leo das so möchte!  
   url_en = "http://dict.leo.org/dictQuery/m-vocab/ende/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=#{@begriff}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"             
@@ -108,7 +114,7 @@ main_menue
 loop do
   case @choice 
   when 1
-    warm_welcome array
+    warm_welcome
     main_menue
   when 2
     select_language 
