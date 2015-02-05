@@ -12,7 +12,7 @@ def warm_welcome
   puts 
   puts  ' an App                         '.green
   `sleep 1` 
-  puts  '       created by: .....        '.green
+  puts  '       created by               '.green
   `sleep 1` 
   puts  '                    Netznarkose '.green
   puts
