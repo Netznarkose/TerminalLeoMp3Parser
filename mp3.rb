@@ -5,7 +5,8 @@ require 'open-uri'
 require 'Clipboard'
 require 'colorize'
 require_relative 'warm_welcome.rb'
-load 'search_word.rb'
+require_relative 'get_help.rb'
+load 'process_url.rb'
 
 # Methods
 
@@ -14,18 +15,18 @@ def default_settings
   @array = []
 end
 
-def lenguage
-  @hash = { "e" => "english", "s" => "spanish", "f" => "french" }
-  puts  "lenguage is set to: #{@hash[@sprache].red}"
+def language
+  @hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
+  puts  "Language is set to: #{@hash[@sprache].red}"
 end
 
 def register
   if @array.empty?
-    @content = "no entrys yet".red
+    @content = "no Activity yet".red
   else
     @content = @array
   end
-  puts  "Bisherige Vokabeln: #{@content}"
+  puts  "Looked up Vocabulary: #{@content}"
 end
 
 def welcome
@@ -41,17 +42,16 @@ def prompting
     puts  '######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ######'
     puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   x => Exit ###"
     puts
-    puts "#{lenguage}\n#{register}"
+    puts "#{language}\n#{register}"
     print "\nword =>  "; @begriff = gets.chomp!
     `sleep 1` 
 end
-def generate_url
+def process_url # loads the SeachWord class from process_url.rb
       @array << @begriff
       finder = SearchWord.new(@begriff, @sprache)
       finder.get_mp3
       finder.copy_to_clipboard
       finder.copy_message
-      `sleep 1` 
       puts `clear`
 end
 
@@ -68,24 +68,6 @@ elsif @begriff == "x"
   puts "\nsee you soon!"
   puts
 else
- generate_url
+  process_url
 end
 end until @begriff == "x"
-  
-  
-  #loop do
-#  case @choice 
-#  when 1
-#    warm_welcome
-#    main_menue
-#  when 2
-#    select_language 
-#    main_menue
-#  when 3
-#    select_word 
-#    main_menue
-#  when 4
-#    break
-#  end
-#end
-
