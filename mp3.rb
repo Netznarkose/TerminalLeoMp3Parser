@@ -28,16 +28,24 @@ def register
   puts  "Bisherige Vokabeln: #{@content}"
 end
 
-def select_word 
-  begin
+def welcome
+  warm_welcome # loads warm_welcome.rb
+end
+
+def help
+  get_help # loads get_help.rb
+end
+
+def prompting 
     puts `clear`# clears bash
-    puts  '######  Leo-Mp3 Finder #######  Search a Word #######'
-    puts  "\nWhich Word Are You Looking For "
-    puts  "\nPress: e for: English s for: Spanish f for: French x for: Exiting"
+    puts  '######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ######'
+    puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   x => Exit ###"
     puts
     puts "#{lenguage}\n#{register}"
     print "\nword =>  "; @begriff = gets.chomp!
-    if @begriff != "e" && @begriff != "f" && @begriff != "s"
+    `sleep 1` 
+end
+def generate_url
       @array << @begriff
       finder = SearchWord.new(@begriff, @sprache)
       finder.get_mp3
@@ -45,17 +53,27 @@ def select_word
       finder.copy_message
       `sleep 1` 
       puts `clear`
-    elsif @begriff == "e" || @begriff == "f" || @begriff == "s"
-      @sprache = @begriff
-    end
-  end until @begriff == "x"
 end
 
 # let the app beginn
 default_settings 
-warm_welcome 
-select_word
-#loop do
+welcome
+begin
+prompting
+if @begriff == "e" || @begriff == "f" || @begriff == "s" 
+  @sprache = @begriff
+elsif @begriff == "h"
+  help
+elsif @begriff == "x"
+  puts "\nsee you soon!"
+  puts
+else
+ generate_url
+end
+end until @begriff == "x"
+  
+  
+  #loop do
 #  case @choice 
 #  when 1
 #    warm_welcome
