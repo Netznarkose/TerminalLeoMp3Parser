@@ -6,7 +6,8 @@ require 'Clipboard'
 require 'colorize'
 require_relative 'warm_welcome.rb'
 require_relative 'get_help.rb'
-load 'process_url.rb'
+#load "./process_url.rb"
+ load "/Users/maximilianmaintz/Coding/ruby/mp3/process_url.rb"
 
 # Methods
 
