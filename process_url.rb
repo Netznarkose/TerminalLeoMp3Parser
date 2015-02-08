@@ -14,7 +14,7 @@ class SearchWord
   end
  
   def copy_message
-    @copy_message =  "Mp3 was copied to the Clipboard".red # test if copy clipboard sucsessfully
+    @copy_message =  "\nMp3 was copied to the Clipboard".red # test if copy clipboard sucsessfully
     puts @copy_message
   end
   def copy_to_clipboard

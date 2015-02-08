@@ -52,6 +52,7 @@ def process_url # loads the SeachWord class from process_url.rb
       finder.get_mp3
       finder.copy_to_clipboard
       finder.copy_message
+      `sleep 1`
       puts `clear`
 end
 
