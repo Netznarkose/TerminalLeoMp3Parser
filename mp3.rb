@@ -59,7 +59,7 @@ end
 
 # let the app beginn
 default_settings 
-welcome
+# welcome
 begin
 prompting
 if @begriff == "e" || @begriff == "f" || @begriff == "s" 
