@@ -41,7 +41,7 @@ end
 def prompting 
     puts `clear`# clears bash
     puts  '######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ######'
-    puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   x => Exit ###"
+    puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
     puts
     puts "#{language}\n#{register}"
     print "\nword =>  "; @begriff = gets.chomp!
@@ -66,7 +66,7 @@ if @begriff == "e" || @begriff == "f" || @begriff == "s"
   @sprache = @begriff
 elsif @begriff == "h"
   help
-elsif @begriff == "x"
+elsif @begriff == "exit"
   puts "\nsee you soon!"
   puts
 else
