@@ -72,4 +72,4 @@ elsif @begriff == "exit"
 else
   process_url
 end
-end until @begriff == "x"
+end until @begriff == "exit"
