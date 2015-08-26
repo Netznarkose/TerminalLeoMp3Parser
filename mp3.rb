@@ -48,12 +48,10 @@ def prompting
     `sleep 1` 
 end
 def process_url # loads the SeachWord class from process_url.rb
-      @array << @begriff
-      finder = SearchWord.new(@begriff, @sprache)
-      finder.get_mp3
-      finder.copy_to_clipboard
-      finder.copy_message
-      `sleep 1`
+      @finder = SearchWord.new(@begriff, @sprache)
+      @finder.get_mp3
+      @finder.copy_to_clipboard
+      @finder.copy_message
       puts `clear`
 end
 
@@ -70,6 +68,17 @@ elsif @begriff == "exit"
   puts "\nsee you soon!"
   puts
 else
-  process_url
+  begin
+    process_url
+    if @finder
+      @array << @begriff
+    end
+  rescue
+    puts "\nWARNING: Word Not Found".red
+    `sleep 1`
+    puts "\nTry Again!".red
+    `sleep 1`
+    @array << "#{@begriff} <--- could not be found"
+  end
 end
 end until @begriff == "exit"
