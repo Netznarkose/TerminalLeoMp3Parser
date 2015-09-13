@@ -23,11 +23,13 @@ end
 
 def register
   if @array.empty?
-    @content = "no Activity yet".red
+  print "\nLooked up Vocabulary:"; print " no Activity yet".red
   else
-    @content = @array
+    @array.map do |items|
+      items.gsub!('%20', ' ')
+    end
+    "Looked up Vocabulary: #{@array}"
   end
-  puts  "Looked up Vocabulary: #{@content}"
 end
 
 def welcome
