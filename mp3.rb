@@ -1,64 +1,65 @@
 # To Do: rescue exception implementieren http://www.tutorialspoint.com/ruby/ruby_exceptions.htm
-# require 'rubygems'
-# require 'nokogiri'   
-# require 'open-uri'
-# require 'Clipboard'
-# require 'colorize'
 # require_relative 'warm_welcome.rb'
 # require_relative 'get_help.rb'
-#load "./process_url.rb"
- # load "/Users/maximilianmaintz/Coding/ruby/mp3/process_url.rb"
+load "./process_url.rb"
 
 # Methods
-class Mp3
-  def default_settings 
-    @sprache = "e"
-    @array = []
-  end
+# class Mp3
+#   def default_settings 
+#     @sprache = "e"
+#     @array = []
+#   end
 
-  def language
-    @hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
-    "Language is set to: #{ @hash[@sprache] }"
-  end
+#   def language
+#     @hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
+#     "Language is set to: #{ @hash[@sprache] }"
+#   end
 
-  def register
-    if @array.empty?
-    print "\nLooked up Vocabulary:"; print " no Activity yet".red
-    else
-      @array.map do |items|
-        items.gsub!('%20', ' ')
-      end
-      "Looked up Vocabulary: #{@array}"
-    end
-  end
+#   def register
+#     if @array.empty?
+#     print "\nLooked up Vocabulary:"; print " no Activity yet".red
+#     else
+#       @array.map do |items|
+#         items.gsub!('%20', ' ')
+#       end
+#       "Looked up Vocabulary: #{@array}"
+#     end
+#   end
 
-  def welcome
-    warm_welcome # loads warm_welcome.rb
-  end
+#   def welcome
+#     warm_welcome # loads warm_welcome.rb
+#   end
 
-  def help
-    get_help # loads get_help.rb
-  end
+#   def help
+#     get_help # loads get_help.rb
+#   end
 
-  def prompting 
-      puts `clear`# clears bash
-      puts  '######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ######'
-      puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
-      puts
-      puts "#{language}\n#{register}"
-      print "\nword =>  "; @begriff = gets.chomp!
-      `sleep 1` 
-  end
-  def process_url # loads the SeachWord class from process_url.rb
-        @finder = SearchWord.new(@begriff, @sprache)
-        @finder.get_mp3
-        @finder.copy_to_clipboard
-        @finder.copy_message
-        puts `clear`
-  end
-end
+#   def prompting 
+#       puts `clear`# clears bash
+#       puts  '######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ######'
+#       puts  "\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
+#       puts
+#       puts "#{language}\n#{register}"
+#       # print "\nword =>  "; @begriff = gets.chomp!
+#       `sleep 1` 
+#   end
+#   def process_url # loads the SeachWord class from process_url.rb
+#         @finder = SearchWord.new(@begriff, @sprache)
+#         @finder.get_mp3
+#         @finder.copy_to_clipboard
+#         @finder.copy_message
+#         puts `clear`
+#   end
+# end
 
 # let the app beginn
+global = SearchWord.new
+global.prompting
+puts global.language_board
+global.user_input
+global.get_mp3
+global.copy_to_clipboard
+global.copy_message
 # default_settings 
 # # welcome
 # begin

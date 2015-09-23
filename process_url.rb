@@ -13,12 +13,25 @@ class SearchWord
     @super_url = ""
   end
 
-  def enter_language
-    @sprache = gets.chomp!
+  def user_input 
+    @user_input = gets.chomp!
+    if @user_input == "e" || @user_input == "f" || @user_input == "s" 
+      @sprache = @user_input
+      prompting
+      user_input    
+    else
+      @begriff = @user_input 
+    end
   end
 
-  def enter_word
-    @begriff = gets.chomp!
+
+  def prompting_menue
+      puts `clear`# clears bash
+      "######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ###### \n\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
+  end
+  def Prompting_language_board
+    hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
+    "Language is set to: #{ hash[@sprache] }"
   end
   
   def get_mp3 
