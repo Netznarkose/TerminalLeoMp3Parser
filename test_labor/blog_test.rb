@@ -1,0 +1,21 @@
+require 'minitest/autorun'
+require './blog'
+
+class TestBlog < Minitest::Test
+
+  def setup
+    @blog = Blog.new
+  end
+
+  def test_title_is_treehouse
+    assert_equal "Treehouse Blog", @blog.title
+  end
+
+  describe "something" do
+  it "does something" do
+    Ooops
+  end
+end
+  
+end
+
