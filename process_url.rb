@@ -17,7 +17,9 @@ class SearchWord
     @user_input = gets.chomp!
     if @user_input == "e" || @user_input == "f" || @user_input == "s" 
       @sprache = @user_input
-      prompting
+      puts prompting_menue
+      puts prompting_language_display
+      puts prompting_register
       user_input    
     else
       @begriff = @user_input 
@@ -27,12 +29,24 @@ class SearchWord
 
   def prompting_menue
       puts `clear`# clears bash
-      "######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ###### \n\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
+      "######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ###### 
+      \n\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
   end
-  def Prompting_language_board
+  def prompting_language_display
     hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
-    "Language is set to: #{ hash[@sprache] }"
+    "\nLanguage is set to: #{ hash[@sprache] }"
   end
+
+    def prompting_register
+      if @array.empty?
+      "\nLooked up Vocabulary:" " no Activity yet"#.red
+      else
+        @array.map do |items|
+          items.gsub!('%20', ' ')
+        end
+        "Looked up Vocabulary: #{@array}"
+      end
+    end
   
   def get_mp3 
     @array << @begriff

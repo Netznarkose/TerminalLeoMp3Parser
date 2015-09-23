@@ -54,8 +54,9 @@ load "./process_url.rb"
 
 # let the app beginn
 global = SearchWord.new
-global.prompting
-puts global.language_board
+puts global.prompting_menue
+puts global.prompting_language_display
+puts global.prompting_register
 global.user_input
 global.get_mp3
 global.copy_to_clipboard
