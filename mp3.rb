@@ -2,6 +2,7 @@
 # require_relative 'warm_welcome.rb'
 # require_relative 'get_help.rb'
 load "./process_url.rb"
+require 'open-uri'
 
 # Methods
 # class Mp3
@@ -54,13 +55,29 @@ load "./process_url.rb"
 
 # let the app beginn
 global = SearchWord.new
-puts global.prompting_menue
-puts global.prompting_language_display
-puts global.prompting_register
-global.user_input
-global.get_mp3
-global.copy_to_clipboard
-global.copy_message
+begin
+  begin
+    puts global.prompting_menue
+    puts global.prompting_language_display
+    puts global.prompting_register
+    user_input = global.user_input
+    if  user_input == "e" || user_input == "f" || user_input == "s" 
+      global.sprache = user_input
+    end
+  end while user_input == "e" || user_input == "f" || user_input == "s" 
+  global.begriff = user_input
+  global.get_mp3
+  global.copy_to_clipboard
+  global.copy_message
+end until user_input == 'no'
+  
+
+
+         
+
+
+# end until user_input == "exit"
+
 # default_settings 
 # # welcome
 # begin
