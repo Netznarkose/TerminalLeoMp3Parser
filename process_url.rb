@@ -12,10 +12,16 @@ class SearchWord
     @array = []
     @copy_message = ""
     @super_url = ""
-    @url = { 'e' => "http://dict.leo.org/dictQuery/m-vocab/ende/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=#{@begriff.gsub!(' ', '%20')}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16",
-             'f' => "http://dict.leo.org/dictQuery/m-vocab/esde/query.xml?tolerMode=nof&lp=esde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff.gsub!(' ', '%20')}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16",
-             's' => "http://dict.leo.org/dictQuery/m-vocab/frde/query.xml?tolerMode=nof&lp=frde&lang=de&rmWords=off&rmSearch=on&directN=0&search=#{@begriff.gsub!(' ', '%20')}&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
-            }
+    @url = ""
+  end
+  
+  def generate_url
+    select_sprache = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
+
+   @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_sprache[@sprache]
+   @url << "/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=" 
+   @url << @begriff 
+   @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   end
 
   def user_input 
@@ -54,13 +60,16 @@ class SearchWord
   end
 
   def generate_nokogiri_object
+    generate_url
     begin
-      noko = Nokogiri::XML(open(@url[@sprache])) # Variable aus dem case-test
+      noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
       rescue
         flash_message(:danger)
       else
         # generate_final_url
         flash_message(:success)
+    @super_url = noko.at_css('pron').first[1]
+    puts "http://dict.leo.org/media/audio/#{@super_url}.mp3"
     end
   end
   def generate_final_url
