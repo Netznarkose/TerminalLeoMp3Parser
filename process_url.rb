@@ -50,34 +50,23 @@ class SearchWord
       end
     end
   
-  def get_mp3 
+  def begriff_to_register
     # copy begriff to register
     # @array << @begriff
     
-    # put begriff to url
-    # replace whitespace
-    # @begriff.gsub!(' ', '%20') 
   end
 
-  def generate_nokogiri_object
+  def get_mp3 
     generate_url
     begin
       noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
       rescue
         flash_message(:danger)
       else
-        # generate_final_url
         flash_message(:success)
-    @super_url = noko.at_css('pron').first[1]
-    puts "http://dict.leo.org/media/audio/#{@super_url}.mp3"
+        final_url = noko.at_css('pron').first[1]
+        "http://dict.leo.org/media/audio/#{final_url}.mp3"
     end
-  end
-  def generate_final_url
-    @super_url = noko.at_css('pron').first[1]
-  end
- 
-  def copy_to_clipboard
-    Clipboard.copy "http://dict.leo.org/media/audio/#{@super_url}.mp3"
   end
  
   def flash_message(data) 
