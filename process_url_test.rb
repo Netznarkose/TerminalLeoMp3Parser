@@ -44,7 +44,7 @@ class TestSearchWord < Minitest::Test
     
     describe "generate_nokogiri_object" do
       it "it is testing the exception the happy path" do
-        @search_word.url = "http://dict.leo.org/dictQuery/m-vocab/ende/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=hello&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
+        @search_word.sprache = 'e'
         @search_word.generate_nokogiri_object.must_equal '\nMp3 was copied to the Clipboard'
       end
     end
