@@ -5,13 +5,14 @@ require 'open-uri'
 require 'colorize'
 
 class SearchWord
-  attr_accessor :sprache, :begriff
+  attr_accessor :sprache, :begriff, :url
   def initialize(input_hash = {})
     @begriff = input_hash[:begriff] || 'hello'
     @sprache = input_hash[:sprache] || 'e' 
     @array = []
     @copy_message = ""
     @super_url = ""
+    @url = ""
   end
 
   def user_input 
@@ -61,13 +62,13 @@ class SearchWord
     # @super_url = noko.at_css('pron').first[1]
   end
   def generate_nokogiri_object
-    noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
-    if success
-      generate_final_url
-      flash_message(:success)
-    else
-      raise exception
-      flash_message(:danger)
+    begin
+      noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
+      rescue
+        flash_message(:danger)
+      else
+        # generate_final_url
+        flash_message(:success)
     end
   end
   def generate_final_url
