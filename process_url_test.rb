@@ -20,20 +20,30 @@ class TestSearchWord < Minitest::Test
         @search_word.prompting_language_display.must_equal "\nLanguage is set to: English"
       end
     end
-  end
-  
-  describe SearchWord do
-    before do
-      @search_word = SearchWord.new
-      @search_word.sprache = 'f'
-    end
-
     describe "#prompting_language_display" do
-      it "it returns french when user typed f" do
+      it "it returns French when user typed f" do
+        @search_word.sprache = 'f'
         @search_word.prompting_language_display.must_equal "\nLanguage is set to: French"
+      end
+  end
+
+    describe "#generate_nokogiri_object" do
+      it "it returns a valid nokogiri class instance" do
+        skip("reason for skipping the test")
+        @search_word.sprache = 'e'
+        @search_word.begriff = 'dog'
+        @search_word.generate_nokogiri_object.must_equal Nokogiri::XML::Document
+      end
+    end
+    
+    describe "#flash_message" do
+      it "it returns the right message" do
+        @search_word.flash_message(:success).must_equal '\nMp3 was copied to the Clipboard'
       end
     end
   end
+  
+
     # ein synonym
     # def test_language_default_message
     #   assert_equal 'Language is set to: ', @mp3.language

@@ -60,14 +60,27 @@ class SearchWord
     # noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
     # @super_url = noko.at_css('pron').first[1]
   end
+  def generate_nokogiri_object
+    noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
+    if success
+      generate_final_url
+      flash_message(:success)
+    else
+      raise exception
+      flash_message(:danger)
+    end
+  end
+  def generate_final_url
+    @super_url = noko.at_css('pron').first[1]
+  end
  
   def copy_to_clipboard
     Clipboard.copy "http://dict.leo.org/media/audio/#{@super_url}.mp3"
   end
  
-  def copy_message
-    @copy_message =  "\nMp3 was copied to the Clipboard".red # test if copy clipboard sucsessfully
-    puts @copy_message
+  def flash_message(data) 
+    flash = {success: '\nMp3 was copied to the Clipboard', danger: 'could not be found'}
+    flash[data]
   end
 end
 
