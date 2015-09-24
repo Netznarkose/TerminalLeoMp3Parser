@@ -15,14 +15,6 @@ class SearchWord
     @url = ""
   end
   
-  def generate_url
-    select_sprache = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
-
-   @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_sprache[@sprache]
-   @url << "/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=" 
-   @url << @begriff 
-   @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
-  end
 
   def user_input 
     @user_input = gets.chomp!
@@ -55,6 +47,7 @@ class SearchWord
     # @array << @begriff
     
   end
+  
 
   def get_mp3 
     generate_url
@@ -68,7 +61,16 @@ class SearchWord
         "http://dict.leo.org/media/audio/#{final_url}.mp3"
     end
   end
+  private
+
  
+  def generate_url
+    select_sprache = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
+    @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_sprache[@sprache]
+    @url << "/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=" 
+    @url << @begriff 
+    @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
+  end
   def flash_message(data) 
     flash = {success: '\nMp3 was copied to the Clipboard', danger: 'could not be found'}
     flash[data]

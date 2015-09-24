@@ -14,11 +14,14 @@ begin
     user_input = global.user_input
     if  user_input == "e" || user_input == "f" || user_input == "s" 
       global.sprache = user_input
+    elsif user_input == 'no'
+      'see you'
+    else
+      global.begriff = user_input
+      puts global.get_mp3
+      puts `sleep 2`
     end
   end while user_input == "e" || user_input == "f" || user_input == "s" 
-  global.begriff = user_input
-  puts global.get_mp3
-  puts `sleep 2`
 end until user_input == 'no'
   
 
