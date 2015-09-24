@@ -1,15 +1,21 @@
 require 'minitest/autorun'
 require './process_url'
 
+
+
+
 class TestSearchWord < Minitest::Test
 
   def setup
     @search_word = SearchWord.new
   end
-
+   
 
   
-
+  
+  
+  
+  
   describe SearchWord do
     before do
       @search_word = SearchWord.new
@@ -20,53 +26,52 @@ class TestSearchWord < Minitest::Test
         @search_word.prompting_language_display.must_equal "\nLanguage is set to: English"
       end
     end
-    describe "#prompting_language_display" do
+    
+      describe "#prompting_language_display" do
       it "it returns French when user typed f" do
         @search_word.sprache = 'f'
         @search_word.prompting_language_display.must_equal "\nLanguage is set to: French"
       end
-  end
-
-    describe "#generate_nokogiri_object" do
-      it "it returns a valid nokogiri class instance" do
-        skip("reason for skipping the test")
+    end
+    
+      describe "#prompting_register" do
+      it "display the register when there was no activity yet" do
+        @search_word.prompting_register.must_equal "\nLooked up Vocabulary: no Activity yet"
+      end
+    end
+      describe "#prompting_register" do
+      it "puts words into register after search" do
         @search_word.sprache = 'e'
-        @search_word.begriff = 'dog'
-        @search_word.generate_nokogiri_object.must_equal Nokogiri::XML::Document
+        @search_word.begriff = 'house'
+        @search_word.get_mp3
+        @search_word.prompting_register.must_equal "Looked up Vocabulary: ['house']"
+      end
+    end
+
+    describe "#get_mp3" do
+      it "it returns a valid nokogiri class instance" do
+        skip("hausaufgabe")
+        # alle user input eingabe formen
+        # die exceptions
       end
     end
     
     describe "#flash_message" do
-      it "it returns the right message" do
+      it "it returns the right success-message" do
+        skip
         @search_word.flash_message(:success).must_equal '\nMp3 was copied to the Clipboard'
       end
     end
     
-    describe "generate_nokogiri_object" do
-      it "it is testing the exception the happy path" do
-        @search_word.sprache = 'e'
-        @search_word.generate_nokogiri_object.must_equal '\nMp3 was copied to the Clipboard'
+    describe "#flash_message" do
+      it "it returns the right danger-message" do
+        skip
+        @search_word.flash_message(:danger).must_equal 'could not be found'
       end
     end
-    describe "generate_nokogiri_object" do
-      it "it is testing the exception the bad path" do
-        @search_word.url = "somerandomstuff23945087"
-        @search_word.generate_nokogiri_object.must_equal 'could not be found'
-      end
-    end
+    
   end
   
-
-    # ein synonym
-    # def test_language_default_message
-    #   assert_equal 'Language is set to: ', @mp3.language
-    # end
-
-  # describe "raises an error" do
-  #   it "does something" do
-  #     Ooops
-  #   end
-  # end
 end
   
 

@@ -15,55 +15,48 @@ class SearchWord
     @url = ""
   end
   
-
-  def user_input 
-    @user_input = gets.chomp!
-  end
-
-
   def prompting_menue
       puts `clear`# clears bash
       "######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ###### 
       \n\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
   end
+
   def prompting_language_display
     hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
     "\nLanguage is set to: #{ hash[@sprache] }"
   end
-
-    def prompting_register
-      if @array.empty?
-      "\nLooked up Vocabulary:" " no Activity yet"#.red
-      else
-        @array.map do |items|
-          items.gsub!('%20', ' ')
-        end
-        "Looked up Vocabulary: #{@array}"
-      end
-    end
   
-  def begriff_to_register
-    # copy begriff to register
-    # @array << @begriff
-    
+  def prompting_register
+    if @array.empty?
+      "\nLooked up Vocabulary:" " no Activity yet"#.red
+    else
+      @array.map do |items|
+        items.gsub!('%20', ' ')
+      end
+      "Looked up Vocabulary: #{@array}"
+    end
+  end
+
+  def user_input 
+    @user_input = gets.chomp!
   end
   
-
-  def get_mp3 
+   def get_mp3 
     generate_url
     begin
       noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
+      final_url = noko.at_css('pron').first[1]
       rescue
+        @array.push "####{@begriff}"
         flash_message(:danger)
       else
+        @array.push @begriff
         flash_message(:success)
-        final_url = noko.at_css('pron').first[1]
         "http://dict.leo.org/media/audio/#{final_url}.mp3"
     end
   end
-  private
+private
 
- 
   def generate_url
     select_sprache = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
     @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_sprache[@sprache]
@@ -71,6 +64,7 @@ class SearchWord
     @url << @begriff 
     @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   end
+
   def flash_message(data) 
     flash = {success: '\nMp3 was copied to the Clipboard', danger: 'could not be found'}
     flash[data]
