@@ -18,7 +18,7 @@ begin
       'see you'
     else
       global.begriff = user_input
-      global.get_mp3
+      puts global.get_mp3
       puts `sleep 2`
     end
   end while user_input == "e" || user_input == "f" || user_input == "s" 

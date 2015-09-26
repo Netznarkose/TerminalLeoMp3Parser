@@ -1,7 +1,7 @@
-require 'rubygems'
 require 'nokogiri'
-require 'Clipboard'
 require 'open-uri'
+require 'rubygems'
+require 'Clipboard'
 require 'colorize'
 
 class SearchWord
@@ -10,8 +10,6 @@ class SearchWord
     @begriff = input_hash[:begriff] || 'hello'
     @sprache = input_hash[:sprache] || 'e' 
     @array = []
-    @copy_message = ""
-    @super_url = ""
     @url = ""
   end
   
@@ -41,18 +39,18 @@ class SearchWord
     @user_input = gets.chomp!
   end
   
-   def get_mp3 
+  def get_mp3 
     generate_url
     begin
       noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
       final_url = noko.at_css('pron').first[1]
-      rescue
-        @array.push "####{@begriff}"
-        flash_message(:danger)
-      else
-        @array.push @begriff
-        flash_message(:success)
-        "http://dict.leo.org/media/audio/#{final_url}.mp3"
+    rescue
+      @array.push "####{@begriff}"
+      flash_message(:danger)
+    else
+      @array.push @begriff
+      flash_message(:success)
+      "http://dict.leo.org/media/audio/#{final_url}.mp3"
     end
   end
 private
