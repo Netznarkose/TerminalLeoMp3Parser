@@ -21,12 +21,12 @@ class SearchWord
 
   def prompting_language_display
     hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
-    "\nLanguage is set to: #{ hash[@sprache] }"
+    "\nLanguage is set to: #{ hash[@sprache].red }"
   end
   
   def prompting_register
     if @array.empty?
-      "\nLooked up Vocabulary:" " no Activity yet"#.red
+      print "\nLooked up Vocabulary:"; " no Activity yet".red
     else
       @array.map do |items|
         items.gsub!('%20', ' ')
@@ -36,7 +36,7 @@ class SearchWord
   end
 
   def user_input 
-    @user_input = gets.chomp!
+    print "\nword =>  "; @user_input = gets.chomp!
   end
   
   def get_mp3 
