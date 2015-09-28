@@ -49,9 +49,14 @@ class SearchWord
       flash_message(:danger)
     else
       @array.push @begriff
+      Clipboard.copy "http://dict.leo.org/media/audio/#{final_url}.mp3"
       flash_message(:success)
-      "http://dict.leo.org/media/audio/#{final_url}.mp3"
     end
+  end
+  
+  def flash_message(data) 
+    flash = {success: "\nMp3 was copied to the Clipboard", danger: "could not be found"}
+    flash[data]
   end
 private
 
@@ -63,9 +68,5 @@ private
     @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   end
 
-  def flash_message(data) 
-    flash = {success: '\nMp3 was copied to the Clipboard', danger: 'could not be found'}
-    flash[data]
-  end
 end
 
