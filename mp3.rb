@@ -1,7 +1,8 @@
 # To Do: rescue exception implementieren http://www.tutorialspoint.com/ruby/ruby_exceptions.htm
 # require_relative 'warm_welcome.rb'
 # require_relative 'get_help.rb'
-load "./process_url.rb"
+# load "./process_url.rb"
+require_relative "./process_url.rb"
 
 
 # let the app beginn
