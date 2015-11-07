@@ -7,8 +7,8 @@ require 'colorize'
 class SearchWord
   attr_accessor :sprache, :begriff, :url
   def initialize(input_hash = {})
-    @begriff = input_hash[:begriff] || 'hello'
-    @sprache = input_hash[:sprache] || 'e' 
+    @term = input_hash[:begriff] || 'hello'
+    @language = input_hash[:sprache] || 'e' 
     @array = []
     @url = ""
   end
@@ -21,7 +21,7 @@ class SearchWord
 
   def prompting_language_display
     hash = { "e" => "English", "s" => "Spanish", "f" => "French" }
-    "\nLanguage is set to: #{ hash[@sprache].red }"
+    "\nLanguage is set to: #{ hash[@language].red }"
   end
   
   def prompting_register
@@ -45,10 +45,10 @@ class SearchWord
       noko = Nokogiri::XML(open(@url)) # Variable aus dem case-test
       final_url = noko.at_css('pron').first[1]
     rescue
-      @array.push "####{@begriff}"
+      @array.push "####{@term}"
       flash_message(:danger)
     else
-      @array.push @begriff
+      @array.push @term
       Clipboard.copy "http://dict.leo.org/media/audio/#{final_url}.mp3"
       flash_message(:success)
     end
@@ -61,10 +61,10 @@ class SearchWord
 private
 
   def generate_url
-    select_sprache = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
-    @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_sprache[@sprache]
+    select_language = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
+    @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_language[@language]
     @url << "/query.xml?tolerMode=nof&lp=ende&lang=en&rmWords=off&rmSearch=on&directN=0&search=" 
-    @url << @begriff 
+    @url << @term 
     @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   end
 
