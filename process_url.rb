@@ -5,18 +5,18 @@ require 'Clipboard'
 require 'colorize'
 
 class SearchWord
-  attr_accessor :sprache, :begriff, :url
+  attr_accessor :language, :term, :url
   def initialize(input_hash = {})
-    @term = input_hash[:begriff] || 'hello'
-    @language = input_hash[:sprache] || 'e' 
+    @term = input_hash[:term] || 'hello'
+    @language = input_hash[:language] || 'e' 
     @array = []
     @url = ""
   end
   
   def prompting_menue
       puts `clear`# clears bash
-      "######  Leo-Mp3 Finder         ###########    Which Word Are You Looking For ###### 
-      \n\n###  Press: e => English   s => Spanish   f => French   h => Help   exit => Quitting ###"
+      "######     L E O -- M P 3 -- F I N D E R        ###########         Which Word Are You Looking For         ###### 
+      \n\n###  Press: e => English  s => Spanish  f => French  clear => deleting vocablist  help => Help  exit => Exit ###"
   end
 
   def prompting_language_display
@@ -31,9 +31,13 @@ class SearchWord
       @array.map do |items|
         items.gsub!('%20', ' ')
       end
-      "Looked up Vocabulary: #{@array}"
+      "\nLooked up Vocabulary: #{@array}"
     end
   end
+
+	def deleting_register
+		@array.clear
+	end
 
   def user_input 
     print "\nword =>  "; @user_input = gets.chomp!
@@ -54,12 +58,12 @@ class SearchWord
     end
   end
   
+private
+
   def flash_message(data) 
     flash = {success: "\nMp3 was copied to the Clipboard", danger: "could not be found"}
     flash[data]
   end
-private
-
   def generate_url
     select_language = { 'e' => 'ende', 's' => 'esde', 'f' => 'frde' }
     @url = "http://dict.leo.org/dictQuery/m-vocab/" << select_language[@language]
@@ -67,6 +71,5 @@ private
     @url << @term 
     @url << "&searchLoc=0&resultOrder=basic&multiwordShowSingle=on&sectLenMax=16"
   end
-
 end
 
