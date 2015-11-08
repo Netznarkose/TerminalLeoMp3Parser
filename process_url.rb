@@ -34,8 +34,8 @@ class SearchWord
       "\nLooked up Vocabulary: #{@array}"
     end
   end
-
-	def deleting_register
+  
+  def deleting_register
     @array.clear
   end
 
