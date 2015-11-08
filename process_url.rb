@@ -36,8 +36,8 @@ class SearchWord
   end
 
 	def deleting_register
-		@array.clear
-	end
+    @array.clear
+  end
 
   def user_input 
     print "\nword =>  "; @user_input = gets.chomp!
