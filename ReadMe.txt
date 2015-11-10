@@ -1,13 +1,15 @@
 Leo Mp3 Parser 
 
-This App is an terminal Application. Before running make sure you have the following Gems installed.
+Der Leo Mp3 Parser ist eine 'reine' Ruby App für die Anwendung im Terminal.
+Nach der Eingabe einer Wortsuche und der Auswahl einer Sprache, sucht die App im Online Wörterbuch 'Leo' https://dict.leo.org/ende/index_de.html die
+entsprechende URL für den Audiodownload.
 
-a. Nokogiri
-b. Clipboard
-c. open-uri
-d. colorize
+Folgende Gem's werden benötigt:
+
+  a. Nokogiri
+  b. Clipboard
+  c. open-uri
+  d. colorize
 
 
 
-To Do List
-TDD abort search when user input has no content
