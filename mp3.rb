@@ -17,11 +17,11 @@ begin
     if  user_input == "e" || user_input == "f" || user_input == "s" 
       global.language = user_input
     elsif user_input == 'exit'
-			puts 'see you'
-		elsif user_input == 'help'
-			get_help
-		elsif user_input == 'clear'
-			global.deleting_register
+      puts 'see you'
+    elsif user_input == 'help'
+      get_help
+    elsif user_input == 'clear'
+      global.deleting_register
     else
       global.term = user_input
       puts global.get_mp3

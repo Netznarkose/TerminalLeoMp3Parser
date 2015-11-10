@@ -3,7 +3,7 @@ def warm_welcome
   puts  '##################################'.green
   puts  '#                                #'.green
   puts  '#                                #'.green
-  puts  '#       Leo-Mp3 Finder           #'.green
+  puts  '#       Leo-Mp3 Parser		  #'.green
   puts  '#                                #'.green
   puts  '##################################'.green
   puts

@@ -15,7 +15,7 @@ class SearchWord
   
   def prompting_menue
       puts `clear`# clears bash
-      "######     L E O -- M P 3 -- F I N D E R        ###########         Which Word Are You Looking For         ###### 
+      "######     L E O -- M P 3 -- P A R S E R        ###########         Which Word Are You Looking For         ###### 
       \n\n###  Press: e => English  s => Spanish  f => French  clear => deleting vocablist  help => Help  exit => Exit ###"
   end
 

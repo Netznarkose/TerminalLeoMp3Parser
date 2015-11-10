@@ -1,4 +1,4 @@
-Leo Mp3 Finder
+Leo Mp3 Parser 
 
 This App is an terminal Application. Before running make sure you have the following Gems installed.
 
