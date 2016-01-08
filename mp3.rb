@@ -6,7 +6,7 @@ require_relative "./process_url.rb"
 
 # let the app beginn
 
-warm_welcome #uncomment for a nice app-intro
+# warm_welcome #uncomment for a nice app-intro
 global = SearchWord.new
 begin
   begin

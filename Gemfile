@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'nokogiri', '~> 1.6', '>= 1.6.7.1'
+gem 'clipboard', '~> 1.0', '>= 1.0.6'
+gem 'colorize', '~> 0.7.7'
+gem 'open-uri-cached', '~> 0.0.5'

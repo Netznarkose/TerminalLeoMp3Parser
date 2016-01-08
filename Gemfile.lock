@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    clipboard (1.0.6)
+    colorize (0.7.7)
+    mini_portile2 (2.0.0)
+    nokogiri (1.6.7.1)
+      mini_portile2 (~> 2.0.0.rc2)
+    open-uri-cached (0.0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  clipboard (~> 1.0, >= 1.0.6)
+  colorize (~> 0.7.7)
+  nokogiri (~> 1.6, >= 1.6.7.1)
+  open-uri-cached (~> 0.0.5)
+
+BUNDLED WITH
+   1.11.2
