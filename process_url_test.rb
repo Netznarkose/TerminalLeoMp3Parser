@@ -1,8 +1,6 @@
 require 'minitest/autorun'
 require './process_url'
-
-
-
+require 'pry-byebug'
 
 class TestSearchWord < Minitest::Test
 
@@ -10,12 +8,6 @@ class TestSearchWord < Minitest::Test
     @search_word = SearchWord.new
   end
    
-
-  
-  
-  
-  
-  
   describe SearchWord do
     before do
       @search_word = SearchWord.new
@@ -29,22 +21,22 @@ class TestSearchWord < Minitest::Test
     
       describe "#prompting_language_display" do
       it "it returns French when user typed f" do
-        @search_word.sprache = 'f'
+        @search_word.language = 'f'
         @search_word.prompting_language_display.must_equal "\nLanguage is set to: French"
       end
     end
     
       describe "#prompting_register" do
       it "display the register when there was no activity yet" do
-        @search_word.prompting_register.must_equal "\nLooked up Vocabulary: no Activity yet"
+        @search_word.prompting_register.must_equal "\nLooked up Vocabulary: No Activity yet"
       end
     end
       describe "#prompting_register" do
       it "puts words into register after search" do
-        @search_word.sprache = 'e'
-        @search_word.begriff = 'house'
+        @search_word.language = 'e'
+        @search_word.term = 'house'
         @search_word.get_mp3
-        @search_word.prompting_register.must_equal "Looked up Vocabulary: ['house']"
+        @search_word.prompting_register.must_equal "\nLooked up Vocabulary: [\"house\"]"
       end
     end
 
@@ -69,9 +61,5 @@ class TestSearchWord < Minitest::Test
         @search_word.flash_message(:danger).must_equal 'could not be found'
       end
     end
-    
   end
-  
 end
-  
-
