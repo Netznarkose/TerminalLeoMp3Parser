@@ -1,36 +1,59 @@
-# To Do: rescue exception implementieren http://www.tutorialspoint.com/ruby/ruby_exceptions.htm
-require_relative 'warm_welcome.rb'
-require_relative 'get_help.rb'
-require_relative "./process_url.rb"
+require 'pry-byebug'
+require 'leo_mp3_parser'
+require_relative './prompt.rb'
+require 'Clipboard'
+require 'colorize'
 
+def prompt_user
+  print "\nword =>  "; gets.chomp!
+end
 
-# let the app beginn
+def clear
+  puts `clear`
+end
 
-# warm_welcome #uncomment for a nice app-intro
-global = SearchWord.new
+def instantiate_prompt
+  Prompt.new
+end
+
+def instantiate_leo_mp3_parser
+  LeoMp3Parser.new
+end
+
+def leo_mp3_dictionary
+  {
+    'e'    => 'ende',
+    's'    => 'esde',
+    'f'    => 'frde'
+  }
+end
+
+def translate_params(language_and_term)
+  { language: leo_mp3_dictionary[language_and_term[:language]], term: language_and_term[:term] }
+end
+
+def sleep
+  puts `sleep 2`
+end
+prompt = instantiate_prompt
+leo_mp3_parser = instantiate_leo_mp3_parser
 begin
   begin
-    puts global.prompting_menue
-    puts global.prompting_language_display
-    puts global.prompting_register
-    user_input = global.user_input
-    if  user_input == "e" || user_input == "f" || user_input == "s" 
-      global.language = user_input
-    elsif user_input == 'exit'
-      puts 'see you'
-    elsif user_input == 'help'
-      get_help
-    elsif user_input == 'clear'
-      global.deleting_register
-    else
-      global.term = user_input
-      puts global.get_mp3
-      puts `sleep 2`
-    end
-  end while user_input == "e" || user_input == "f" || user_input == "s" 
-end until user_input == 'exit'
-  
-
-
-         
-
+    clear
+    language_and_term ||= { language: 'e', term: 'hello' }
+    puts prompt.header
+    puts prompt.selected_language(language_and_term[:language])
+    puts prompt.vocab_list
+    answer_user = prompt_user
+    language_and_term[:language] = answer_user if prompt.language_hash.key?(answer_user)
+  end while prompt.language_hash.key?(answer_user)
+  language_and_term[:term] = answer_user
+  if language_and_term[:term] == 'clear'
+    prompt.clear_vocab_list
+  else
+    Clipboard.copy leo_mp3_parser.get_audio_url(translate_params(language_and_term))
+    puts "\nURL to Audiofile was copied to the Clipboard".red
+    sleep
+    prompt.vocabulary += [language_and_term[:term]]
+  end
+end until language_and_term[:term] == 'exit'
