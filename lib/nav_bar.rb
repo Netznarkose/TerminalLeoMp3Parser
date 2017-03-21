@@ -17,7 +17,7 @@ module NavBar
     "\nLanguage is set to: #{language_hash[language]}"
   end
 
-  def vocab_list(vocabulary)
+  def looked_up_vocab(vocabulary)
     "\nLooked up Vocabulary: %s" % (vocabulary.any? ? vocabulary : 'No Activity yet').to_s
   end
 

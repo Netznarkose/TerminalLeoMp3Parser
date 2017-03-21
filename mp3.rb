@@ -29,7 +29,7 @@ def leo_mp3_dictionary # better naming
   }
 end
 
-def translate_params(language_and_term) # better naming
+def argument_adapter(language_and_term) # better naming
   { language: leo_mp3_dictionary[language_and_term[:language]], term: language_and_term[:term] }
 end
 
@@ -49,7 +49,7 @@ loop do
     language_and_term ||= { language: 'e', term: 'hello' }
     puts header
     puts selected_language(language_and_term[:language])
-    puts vocab_list(vocab.list)
+    puts looked_up_vocab(vocab.list)
     answer_user = prompt_user
     language_and_term[:language] = answer_user if language_hash.key?(answer_user)
   end while language_hash.key?(answer_user)
@@ -58,8 +58,7 @@ loop do
   if language_and_term[:term] == 'clear'
     vocab.list.clear
   else
-    binding.pry
-    copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
+    copy_to_clipboard(leo_mp3_parser.get_audio_url(argument_adapter(language_and_term)))
     # file not found case !!!
     puts messages(:success)
     sleep
