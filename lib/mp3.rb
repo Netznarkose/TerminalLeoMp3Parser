@@ -1,5 +1,5 @@
-require_relative './lib/nav_bar.rb'
-require_relative './lib/vocab.rb'
+require_relative './prompt.rb'
+require_relative './vocab.rb'
 require 'leo_mp3_parser'
 require 'Clipboard'
 require 'colorize'
@@ -58,7 +58,6 @@ loop do
   if language_and_term[:term] == 'clear'
     vocab.list.clear
   else
-    binding.pry
     copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
     # file not found case !!!
     puts messages(:success)
