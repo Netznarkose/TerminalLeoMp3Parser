@@ -1,4 +1,4 @@
-require_relative './prompt.rb'
+require_relative './nav_bar.rb'
 require_relative './vocab.rb'
 require 'leo_mp3_parser'
 require 'Clipboard'
@@ -33,9 +33,9 @@ def translate_params(language_and_term) # better naming
   { language: leo_mp3_dictionary[language_and_term[:language]], term: language_and_term[:term] }
 end
 
-def sleep
-  puts `sleep 2`
-end
+# def sleep # this throws an exception do not ask my why?
+#   puts `sleep 2`
+# end
 
 def copy_to_clipboard(content)
   Clipboard.copy(content)
@@ -49,7 +49,7 @@ loop do
     language_and_term ||= { language: 'e', term: 'hello' }
     puts header
     puts selected_language(language_and_term[:language])
-    puts vocab_list(vocab.list)
+    puts looked_up_vocab(vocab.list)
     answer_user = prompt_user
     language_and_term[:language] = answer_user if language_hash.key?(answer_user)
   end while language_hash.key?(answer_user)
@@ -61,7 +61,7 @@ loop do
     copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
     # file not found case !!!
     puts messages(:success)
-    sleep
+    puts `sleep 2`
     vocab.list += [language_and_term[:term]]
   end
 end

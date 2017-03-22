@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    leo_mp3_parser (0.0.04)
+    leo_mp3_parser (0.0.07)
 
 PLATFORMS
   ruby
