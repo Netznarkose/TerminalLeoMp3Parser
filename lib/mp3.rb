@@ -58,10 +58,12 @@ loop do
   if language_and_term[:term] == 'clear'
     vocab.list.clear
   else
-    copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
-    # file not found case !!!
-    puts messages(:success)
-    puts `sleep 2`
-    vocab.list += [language_and_term[:term]]
+    begin
+      copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
+      vocab.list += [language_and_term[:term]]
+      puts messages(:success); puts `sleep 2`
+    rescue
+      puts messages(:failed); puts `sleep 2`
+    end
   end
 end

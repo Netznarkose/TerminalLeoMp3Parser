@@ -23,9 +23,9 @@ module NavBar
 
   def messages(type)
     if type == :success
-      "\n URL to Audiofile was copied to Clipboard".red
-    else
-      ""
+      "\nURL to Audiofile was copied to Clipboard".red
+    elsif type == :failed
+      "\nURL to Audiofile could not be found".red
     end
   end
 end
