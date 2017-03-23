@@ -21,7 +21,7 @@ module NavBar
     "\nLooked up Vocabulary: %s" % (vocabulary.any? ? vocabulary : 'No Activity yet').to_s
   end
 
-  def messages(type)
+  def notification(type)
     if type == :success
       "\nURL to Audiofile was copied to Clipboard".green
     elsif type == :failed

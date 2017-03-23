@@ -26,11 +26,11 @@ loop do
     vocab.list.clear
   else
     begin
-      copy_to_clipboard(leo_mp3_parser.get_audio_url(translate_params(language_and_term)))
+      copy_to_clipboard(leo_mp3_parser.get_audio_url(leo_mp3_parser_argument_adapter(language_and_term)))
       vocab.list += [language_and_term[:term]]
-      puts messages(:success); puts `sleep 2`
+      puts notification(:success); puts `sleep 2`
     rescue
-      puts messages(:failed); puts `sleep 2`
+      puts notification(:failed); puts `sleep 2`
     end
   end
 end

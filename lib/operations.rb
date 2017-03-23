@@ -15,7 +15,7 @@ module Operations
     Vocab.new
   end
 
-  def leo_mp3_dictionary # better naming
+  def leo_mp3_parser_language_conversion
     {
       'e'    => 'ende',
       's'    => 'esde',
@@ -23,11 +23,11 @@ module Operations
     }
   end
 
-  def translate_params(language_and_term) # better naming
-    { language: leo_mp3_dictionary[language_and_term[:language]], term: language_and_term[:term] }
+  def leo_mp3_parser_argument_adapter(language_and_term)
+    { language: leo_mp3_parser_language_conversion[language_and_term[:language]], term: language_and_term[:term] }
   end
 
-  def copy_to_clipboard(content)
-    Clipboard.copy(content)
+  def copy_to_clipboard(url)
+    Clipboard.copy(url)
   end
 end
