@@ -1,3 +1,4 @@
+require 'colorize'
 module NavBar
 
   def header
