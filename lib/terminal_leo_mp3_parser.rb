@@ -4,7 +4,6 @@ require_relative './operations.rb'
 include NavBar
 include Operations
 
-
 leo_mp3_parser = instantiate_leo_mp3_parser
 vocab = instantiate_vocab
 loop do

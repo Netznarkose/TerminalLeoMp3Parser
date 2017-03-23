@@ -1,6 +1,5 @@
 require 'colorize'
 module NavBar
-
   def header
     puts '#' * 9 << ' ' * 8 << 'L E O -- M P 3 -- P A R S E R' << ' ' * 8 << '#' * 9 # use format
     print "\nType:  exit => Exit   "; language_hash.map { |key, value| print "#{key} => #{value}   " }
