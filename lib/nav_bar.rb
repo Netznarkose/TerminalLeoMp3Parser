@@ -1,7 +1,7 @@
 module NavBar
 
   def header
-    puts '#' * 6 << ' ' * 6 << 'L E O -- M P 3 -- P A R S E R' << ' ' * 6 << '#' * 6 # use format
+    puts '#' * 9 << ' ' * 8 << 'L E O -- M P 3 -- P A R S E R' << ' ' * 8 << '#' * 9 # use format
     print "\nType:  exit => Exit   "; language_hash.map { |key, value| print "#{key} => #{value}   " }
   end
 
@@ -23,7 +23,7 @@ module NavBar
 
   def messages(type)
     if type == :success
-      "\nURL to Audiofile was copied to Clipboard".red
+      "\nURL to Audiofile was copied to Clipboard".green
     elsif type == :failed
       "\nURL to Audiofile could not be found".red
     end

@@ -1,6 +1,6 @@
 module Operations
   def prompt_user
-    print "\nword =>  "; gets.chomp!
+    print "\nTerm =>  "; gets.chomp!
   end
 
   def clear
