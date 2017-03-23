@@ -9,4 +9,5 @@ end
 
 group :test, :develpment do
   gem 'pry-byebug'
+  gem 'rake'
 end
