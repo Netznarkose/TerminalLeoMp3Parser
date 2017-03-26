@@ -1,6 +1,9 @@
 require_relative './nav_bar.rb'
 require_relative './vocab.rb'
 require_relative './operations.rb'
+require 'leo_mp3_parser'
+require 'Clipboard'
+require 'colorize'
 include NavBar
 include Operations
 

@@ -1,4 +1,3 @@
-require 'spec_helper'
 require_relative '../lib/operations.rb'
 RSpec.describe 'operations' do
   let(:operations) { (Class.new { include Operations }).new }

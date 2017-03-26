@@ -1,5 +1,3 @@
-require 'leo_mp3_parser'
-require 'Clipboard'
 module Operations
   def prompt_user
     print "\nTerm =>  "; gets.chomp!
