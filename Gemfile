@@ -1,14 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'leo_mp3_parser'
-group :test do
-  gem 'rspec'
-  gem 'nokogiri'
-  gem 'clipboard'
-  gem 'colorize'
-end
+gem 'clipboard'
+gem 'colorize'
+gem 'rake'
 
 group :test, :develpment do
+  gem 'rspec'
   gem 'pry-byebug'
-  gem 'rake'
 end
